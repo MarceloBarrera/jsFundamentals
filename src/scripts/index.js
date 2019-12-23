@@ -1,3 +1,9 @@
-import '../styles/index.scss';
+let promise = new Promise(function(resolve, reject) {
+  setTimeout(reject, 100, "pepe");
+});
 
-console.log('webpack starterkit');
+promise.then(
+  value => console.log("fullfilled: ", value),
+  error => console.log("rejecyed: " + error)
+);
+console.log(promise);
