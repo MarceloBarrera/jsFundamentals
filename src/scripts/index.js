@@ -9,11 +9,16 @@ const asyncMethod = message => {
   });
 };
 
-//With Promise then this become "Thenable"
-asyncMethod("open DB connection").then(() => {
-  asyncMethod("find user").then(() => {
-    asyncMethod("validate user").then(() => {
-      asyncMethod("doStuff").then(() => {});
-    });
-  });
-});
+const findUser = () => {
+  asyncMethod("find user").then(validateUser);
+};
+
+const validateUser = () => {
+  asyncMethod("validate user").then(doStuff);
+};
+
+const doStuff = () => {
+  asyncMethod("doStuff").then(() => {});
+};
+
+asyncMethod("open DB connection").then(findUser);
