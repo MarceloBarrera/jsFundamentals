@@ -1,15 +1,19 @@
-const asyncMethod = (message, cb) => {
-  setTimeout(function() {
-    console.log(message);
-    cb();
-  }, 500);
+//good reference to get the promise support:  wwww.promisejs.org , that was when Promise was not fully supported.
+
+const asyncMethod = message => {
+  return new Promise((fullfill, reject) => {
+    setTimeout(() => {
+      console.log(message);
+      fullfill();
+    }, 500);
+  });
 };
 
-//Xmas tree code:
-asyncMethod("open DB connection", () => {
-  asyncMethod("find user", () => {
-    asyncMethod("validate user", () => {
-      asyncMethod("doStuff", () => {});
+//With Promise then this become "Thenable"
+asyncMethod("open DB connection").then(() => {
+  asyncMethod("find user").then(() => {
+    asyncMethod("validate user").then(() => {
+      asyncMethod("doStuff").then(() => {});
     });
   });
 });
