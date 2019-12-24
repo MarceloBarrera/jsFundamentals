@@ -1,9 +1,15 @@
-let promise = new Promise(function(resolve, reject) {
-  setTimeout(reject, 100, "pepe");
-});
+const asyncMethod = (message, cb) => {
+  setTimeout(function() {
+    console.log(message);
+    cb();
+  }, 500);
+};
 
-promise.then(
-  value => console.log("fullfilled: ", value),
-  error => console.log("rejected: " + error)
-);
-console.log(promise);
+//Xmas tree code:
+asyncMethod("open DB connection", () => {
+  asyncMethod("find user", () => {
+    asyncMethod("validate user", () => {
+      asyncMethod("doStuff", () => {});
+    });
+  });
+});
