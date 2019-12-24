@@ -10,15 +10,19 @@ const asyncMethod = message => {
 };
 
 const findUser = () => {
-  asyncMethod("find user").then(validateUser);
+  return asyncMethod("find user");
 };
 
 const validateUser = () => {
-  asyncMethod("validate user").then(doStuff);
+  return asyncMethod("validate user");
 };
 
 const doStuff = () => {
-  asyncMethod("doStuff").then(() => {});
+  return asyncMethod("doStuff");
 };
 
-asyncMethod("open DB connection").then(findUser);
+asyncMethod("open DB connection")
+  .then(findUser)
+  .then(validateUser)
+  .then(doStuff)
+  .then(() => {});
