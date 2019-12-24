@@ -4,6 +4,6 @@ let promise = new Promise(function(resolve, reject) {
 
 promise.then(
   value => console.log("fullfilled: ", value),
-  error => console.log("rejecyed: " + error)
+  error => console.log("rejected: " + error)
 );
 console.log(promise);
