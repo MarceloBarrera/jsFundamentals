@@ -1,28 +1,20 @@
-//good reference to get the promise support:  wwww.promisejs.org , that was when Promise was not fully supported.
+//check out es6 features preset and so on:
+//https://kangax.github.io/compat-table/es6/
 
-const asyncMethod = message => {
+const asyncMethod = (message, number) => {
   return new Promise((fullfill, reject) => {
     setTimeout(() => {
-      console.log(message);
-      fullfill();
+      console.log(message, number);
+      fullfill(number + 1);
     }, 500);
   });
 };
 
-const findUser = () => {
-  return asyncMethod("find user");
+const main = async () => {
+  const one = await asyncMethod("open db connection", 0);
+  const two = await asyncMethod("find user", one);
+  const three = await asyncMethod("validate user", two);
+  const four = await asyncMethod("do stuff", three);
 };
 
-const validateUser = () => {
-  return asyncMethod("validate user");
-};
-
-const doStuff = () => {
-  return asyncMethod("doStuff");
-};
-
-asyncMethod("open DB connection")
-  .then(findUser)
-  .then(validateUser)
-  .then(doStuff)
-  .then(() => {});
+main();
